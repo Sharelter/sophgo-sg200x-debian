@@ -9,7 +9,7 @@ RUN apt-get update \
         binfmt-support gdisk kpartx sbuild \
         parted ca-certificates dh-make \
         autoconf automake autotools-dev bc \
-        build-essential cpio curl sudo \
+        build-essential cpio curl wget sudo \
         dosfstools e2fsprogs fdisk flex gawk  \
         git gperf kmod libexpat-dev \
         libgmp-dev libmpc-dev libmpfr-dev libssl-dev \
