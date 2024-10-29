@@ -36,7 +36,7 @@ jobs:
           id: meta
           uses: docker/metadata-action@v5
           with:
-            images: ghcr.io/fishwaldo/sophgo-sg200x-debian
+            images: ghcr.io/sharelter/sophgo-sg200x-debian
 
         - name: Build and push Docker image
           if: (github.event_name != 'pull_request' && steps.filter.outputs.src == 'true') || startsWith(github.event.ref, 'refs/tags/v')
