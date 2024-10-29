@@ -87,14 +87,14 @@ The images, by default, do not allocate any memory for the ION heap, as they are
 The images also include the remoteproc and mailbox drivers so you can load up ardunio/freertos images on the small C906 core. 
 
 ### Additional Packages
-This image also adds the debian repository for https://github.com/Fishwaldo/sophgo-sg200x-packages so you can install additional repositories. The debian repository is hosted at 
+This image also adds the debian repository for https://github.com/sharelter/sophgo-sg200x-packages so you can install additional repositories. The debian repository is hosted at 
 https://sophgo.my-ho.st:8443/ which pulls down the compiled debian packages from the above github repository occasionally.
 
 
 ## Building the Image
 To build a stock image with no modifications:
 ```
-podman run --privileged -it --rm -v ./configs/:/configs -v ./image:/output ghcr.io/fishwaldo/sophgo-sg200x-debian:master make BOARD=licheervnano image
+podman run --privileged -it --rm -v ./configs/:/configs -v ./image:/output ghcr.io/sharelter/sophgo-sg200x-debian:master make BOARD=licheervnano image
 ```
 
 Replace the licheervnano with the board you want to build for:
@@ -104,7 +104,7 @@ Replace the licheervnano with the board you want to build for:
 
 If you want to create a image for the DuoS with EMMC, you can add "STORAGE_TYPE=emmc" to the make commannd:
 ```
-podman run --privileged -it --rm -v ./configs/:/configs -v ./image:/output ghcr.io/fishwaldo/sophgo-sg200x-debian:master make BOARD=duos STORAGE_TYPE=emmc image
+podman run --privileged -it --rm -v ./configs/:/configs -v ./image:/output ghcr.io/sharelter/sophgo-sg200x-debian:master make BOARD=duos STORAGE_TYPE=emmc image
 ```
 
 The Docker image will build the image and place it in the image directory
