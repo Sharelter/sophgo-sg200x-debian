@@ -34,12 +34,16 @@ $(info $(blue)Packages: $(_PACKAGES)$(reset))
 
 NPROCS := $(shell nproc)
 
+$(BUILDDIR)/prepare-sdk-stamp:
+	@echo "$(COLOUR_GREEN)Preparing SDK$(END_COLOUR)"
+	@mkdir -p $(BUILDDIR)
+	@git clone -b develop --depth 5 https://github.com/milkv-duo/duo-buildroot-sdk.git $(BUILDDIR)/sdk
+	@touch $@
 
-$(BUILDDIR)/linux-prepare-checkout-stamp:
+$(BUILDDIR)/linux-prepare-checkout-stamp: $(BUILDDIR)/prepare-sdk-stamp
 	@echo "$(COLOUR_GREEN)Checking out Kernel for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone -b sg200x-dev --depth 5 https://github.com/sophgo/linux_5.10.git /build/kernel
-	@cd $(BUILDDIR)/kernel && git checkout 8b8fbf8
+	@cp -r $(BUILDDIR)/sdk/linux_5.10 $(BUILDDIR)/kernel
 	@touch $@
 
 $(BUILDDIR)/linux-prepare-patch-stamp: $(BUILDDIR)/linux-prepare-checkout-stamp
@@ -76,11 +80,10 @@ linux-clean:
 	@rm -f $(BUILDDIR)/linux-*.deb
 
 
-$(BUILDDIR)/uboot-prepare-checkout-stamp:
+$(BUILDDIR)/uboot-prepare-checkout-stamp: $(BUILDDIR)/prepare-sdk-stamp
 	@echo "$(COLOUR_GREEN)Checking out U-Boot for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone --depth 1 https://github.com/milkv-duo/u-boot-2021.10.git $(BUILDDIR)/u-boot
-	@cd $(BUILDDIR)/u-boot && git checkout a57aa1f
+	@cp -r $(BUILDDIR)/sdk/u-boot-2021.10 $(BUILDDIR)/u-boot
 	@touch $@
 
 $(BUILDDIR)/uboot-prepare-patch-stamp: $(BUILDDIR)/uboot-prepare-checkout-stamp
@@ -119,11 +122,10 @@ uboot-clean:
 	@rm -f $(BUILDDIR)/uboot-*-stamp
 
 
-$(BUILDDIR)/opensbi-prepare-checkout-stamp:
+$(BUILDDIR)/opensbi-prepare-checkout-stamp: $(BUILDDIR)/prepare-sdk-stamp
 	@echo "$(COLOUR_GREEN)Checking out OpenSBI for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone -b sg200x-dev --depth 1 https://github.com/sophgo/opensbi.git $(BUILDDIR)/opensbi
-	@cd $(BUILDDIR)/opensbi && git checkout 216793f
+	@cp -r $(BUILDDIR)/sdk/opensbi $(BUILDDIR)/opensbi
 #	git clone https://github.com/riscv-software-src/opensbi.git $(BUILDDIR)/opensbi
 #	@cd $(BUILDDIR)/opensbi && git checkout a2b255b
 	@touch $@
@@ -148,11 +150,12 @@ opensbi-clean:
 	@rm -f $(BUILDDIR)/opensbi-*-stamp
 
 
-$(BUILDDIR)/fsbl-prepare-checkout-stamp:
+$(BUILDDIR)/fsbl-prepare-checkout-stamp: $(BUILDDIR)/prepare-sdk-stamp
 	@echo "$(COLOUR_GREEN)Checking out FSBL for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone -b milkv --depth 1 https://github.com/milkv-duo/fsbl.git $(BUILDDIR)/fsbl
-	@cd $(BUILDDIR)/fsbl && git checkout beb1483
+	@cp -r $(BUILDDIR)/sdk/fsbl $(BUILDDIR)/fsbl
+#	@git clone -b milkv --depth 1 https://github.com/milkv-duo/fsbl.git $(BUILDDIR)/fsbl
+#	@cd $(BUILDDIR)/fsbl && git checkout beb1483
 	@touch $@
 
 $(BUILDDIR)/fsbl-prepare-patch-stamp: $(BUILDDIR)/fsbl-prepare-checkout-stamp
