@@ -57,9 +57,6 @@ jobs:
       matrix:
         boards: [duo256]
         storage: [sd]
-        include: 
-          - boards: duos
-            storage: emmc
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
