@@ -55,7 +55,7 @@ jobs:
     needs: build-docker-image
     strategy:
       matrix:
-        boards: [licheervnano, duo256, duos]
+        boards: [duo256]
         storage: [sd]
         include: 
           - boards: duos
