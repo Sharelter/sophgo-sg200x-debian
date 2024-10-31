@@ -193,7 +193,7 @@ fsbl-clean:
 
 $(BUILDDIR)/image-prepare-stamp: 
 	@echo "$(COLOUR_GREEN)Preparing Image for $(BOARD)$(END_COLOUR)"
-	@-mkdir $(BUILDDIR)
+	@-mkdir -p $(BUILDDIR)
 	@rm -rf /rootfs/
 	@-rm $(addon-targets)
 	@mkdir -p /rootfs/
