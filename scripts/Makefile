@@ -151,7 +151,7 @@ opensbi-clean:
 $(BUILDDIR)/fsbl-prepare-checkout-stamp:
 	@echo "$(COLOUR_GREEN)Checking out FSBL for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone -b main --depth 1 https://github.com/gtxzsxxk/milkv-duo-firmware-fsbl $(BUILDDIR)/fsbl
+	@git clone -b main --depth 1 https://github.com/Sharelter/milkv-duo-fsbl.git $(BUILDDIR)/fsbl
 	# @cd $(BUILDDIR)/fsbl && git checkout beb1483
 	@touch $@
 
