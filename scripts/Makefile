@@ -79,7 +79,7 @@ linux-clean:
 $(BUILDDIR)/uboot-prepare-checkout-stamp:
 	@echo "$(COLOUR_GREEN)Checking out U-Boot for $(BOARD)$(END_COLOUR)"
 	@mkdir -p $(BUILDDIR)
-	@git clone --depth 10 https://github.com/Taumille/uboot-milkv $(BUILDDIR)/u-boot
+	@git clone --depth 10 https://github.com/Sharelter/u-boot-2021.10.git $(BUILDDIR)/u-boot
 	@cd $(BUILDDIR)/u-boot && git checkout a57aa1f
 	@touch $@
 
